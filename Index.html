@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GATE Study Schedule Generator</title><style>
+body{
+font-family: 'Segoe UI', sans-serif;
+margin:0;
+background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+color:white;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+background:rgba(0,0,0,0.25);
+backdrop-filter:blur(6px);
+}
+
+nav a{
+margin-left:25px;
+color:white;
+text-decoration:none;
+font-weight:500;
+}
+
+.hero{
+text-align:center;
+padding:60px 20px;
+}
+
+.hero h1{
+font-size:48px;
+margin-bottom:10px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.08);
+padding:25px;
+border-radius:14px;
+margin-top:25px;
+}
+
+input{
+padding:12px;
+border:none;
+border-radius:8px;
+margin:10px;
+}
+
+button{
+padding:14px 25px;
+border:none;
+border-radius:10px;
+background:#6ea8fe;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#4d8df5;
+}
+
+.week{
+margin-top:20px;
+padding:20px;
+border-radius:12px;
+background:rgba(255,255,255,0.06);
+}
+
+.topic{
+margin:6px 0;
+}
+
+.checkbox{
+margin-top:10px;
+}
+
+footer{
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+</style></head><body><header>
+<h2>MIC on Mithila – GATE Planner</h2><nav>
+<a href="#">Resources</a>
+<a href="#">Daily Questions</a>
+<a href="#">Schedule</a>
+<a href="#">Community</a>
+</nav></header><section class="hero">
+<h1>GATE Study Schedule Generator</h1>
+<p>Select preparation duration & generate weekly Civil Engineering study plan</p>
+</section><div class="container"><div class="card">
+<label>Start Date:</label>
+<input type="date" id="start"><label>End Date:</label> <input type="date" id="end">
+
+<br><br>
+
+<button onclick="generatePlan()">Generate Plan</button>
+
+</div><div id="output"></div></div><footer>
+© 2026 MIC on Mithila – GATE Academy
+</footer><script>
+
+const subjects=[
+"Engineering Mathematics",
+"Strength of Materials",
+"Structural Analysis",
+"Geotechnical Engineering",
+"Fluid Mechanics",
+"Environmental Engineering",
+"Transportation Engineering",
+"RCC",
+"Steel Structures",
+"General Aptitude"
+]
+
+function generatePlan(){
+
+let start=document.getElementById("start").value
+let end=document.getElementById("end").value
+
+if(!start || !end){
+alert("Please select dates")
+return
+}
+
+let output=document.getElementById("output")
+output.innerHTML=""
+
+let startDate=new Date(start)
+let endDate=new Date(end)
+
+let weeks=Math.ceil((endDate-startDate)/(1000*60*60*24*7))
+
+for(let i=1;i<=weeks;i++){
+
+let subject=subjects[(i-1)%subjects.length]
+
+output.innerHTML+=`
+<div class="week">
+<h3>Week ${i}</h3>
+<div class="topic">Subject: ${subject}</div>
+<div class="topic">Watch Concept Videos</div>
+<div class="topic">Solve PYQs</div>
+<div class="topic">Attempt Topic Test</div>
+
+<label class="checkbox">
+<input type="checkbox"> Mark Week Complete
+</label>
+</div>
+`
+}
+
+}
+
+</script></body>
+</html>
